@@ -6,6 +6,7 @@
 #define MATRIX_H
 
 #include <vector>
+#include <cassert>
 #include "SquareMatrix.h"
 
 template <class T>
@@ -15,8 +16,9 @@ private:
     unsigned dim;
     std::vector<std::vector<T>> matrix;
 public:
-    explicit SquareMatrix(unsigned N);
-    void resize(unsigned N);
+    explicit SquareMatrix(const unsigned &N);
+    void resize(const unsigned &N);
+    T& operator ()(const unsigned &row, const unsigned &col);
 
     template <class T1>
     friend std::ostream& operator <<(std::ostream &ofs, const SquareMatrix<T1> &matrix);
@@ -25,7 +27,7 @@ public:
 //---------------------------------------------------------------------------------------------------------------//
 
 template <class T>
-SquareMatrix<T>::SquareMatrix(unsigned int N)
+SquareMatrix<T>::SquareMatrix(const unsigned &N)
 {
     matrix = {};
     dim = 0;
@@ -33,7 +35,7 @@ SquareMatrix<T>::SquareMatrix(unsigned int N)
 }
 
 template <class T>
-void SquareMatrix<T>::resize(unsigned int N)
+void SquareMatrix<T>::resize(const unsigned &N)
 {
     matrix.resize(N);
     for(auto &row: matrix)
@@ -41,6 +43,13 @@ void SquareMatrix<T>::resize(unsigned int N)
         row.resize(N);
     }
     dim = N;
+}
+
+template <class T>
+T& SquareMatrix<T>::operator ()(const unsigned &row, const unsigned &col)
+{
+    assert(row<dim && col<dim);
+    return matrix[row][col];
 }
 
 //---------------------------------------------------------------------------------------------------------------//

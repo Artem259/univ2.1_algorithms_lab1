@@ -4,6 +4,8 @@
 
 int main()
 {
-    SquareMatrix<int> a(3);
+    Rational a;
+    SquareMatrix<Rational> b(3);
+    std::cout<<b;
     return 0;
 }

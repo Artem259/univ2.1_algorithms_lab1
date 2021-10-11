@@ -3,7 +3,6 @@
 //
 
 #include "rational.h"
-
 #include <iostream>
 
 int gcd(int x, int y) // Euclidean algorithm
@@ -44,10 +43,6 @@ Rational::Rational(int n, int d)
     reduction(numerator, denominator);
 }
 
-void Rational::print() const
-{
-    std::cout << numerator << "/" << denominator;
-}
 
 Rational operator + (const Rational &r1,const Rational &r2)
 {
@@ -83,4 +78,10 @@ Rational operator / (const Rational &r1, const Rational &r2)
     r3.numerator = r1.numerator * r2.denominator;
     reduction(r3.numerator, r3.denominator);
     return r3;
+}
+
+std::ostream& operator << (std::ostream &ofs, const Rational &r)
+{
+    ofs << r.numerator << "/" << r.denominator;
+    return ofs;
 }

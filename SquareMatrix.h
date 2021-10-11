@@ -17,6 +17,9 @@ private:
 public:
     explicit SquareMatrix(unsigned N);
     void resize(unsigned N);
+
+    template <class T1>
+    friend std::ostream& operator <<(std::ostream &ofs, const SquareMatrix<T1> &matrix);
 };
 
 //---------------------------------------------------------------------------------------------------------------//
@@ -38,6 +41,22 @@ void SquareMatrix<T>::resize(unsigned int N)
         row.resize(N);
     }
     dim = N;
+}
+
+//---------------------------------------------------------------------------------------------------------------//
+
+template <class T>
+std::ostream& operator <<(std::ostream &ofs, const SquareMatrix<T> &matrix)
+{
+    for(auto &row: matrix.matrix)
+    {
+        for(auto &col: row)
+        {
+            ofs << col << " ";
+        }
+        ofs << std::endl;
+    }
+    return ofs;
 }
 
 

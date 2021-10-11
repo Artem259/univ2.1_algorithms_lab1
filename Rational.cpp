@@ -2,7 +2,7 @@
 // Created by Pavel Kilko on 9/20/2021.
 //
 
-#include "rational.h"
+#include "Rational.h"
 #include <iostream>
 
 int gcd(int x, int y) // Euclidean algorithm

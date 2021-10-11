@@ -1,12 +1,14 @@
 #include <iostream>
-#include "SquareMatrix.h"
-#include "rational.h"
+#include "RationalMatrix.h"
+
 
 int main()
 {
-    SquareMatrix<Rational> b(3);
-    b(2,2).denominator = 2;
-    b(0,0).numerator = 4;
-    std::cout<<b;
+    RationalMatrix b(2,3);
+    b(0,0).denominator = 2;
+    b(1,2).numerator = 4;
+    std::cout<<b<<std::endl;
+    b.swapRows(0,1);
+    std::cout<<b<<std::endl;
     return 0;
 }

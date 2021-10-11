@@ -1,6 +1,8 @@
 #include <iostream>
+#include "SquareMatrix.h"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+int main()
+{
+    SquareMatrix a(3);
     return 0;
 }

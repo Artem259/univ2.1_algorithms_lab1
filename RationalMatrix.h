@@ -11,14 +11,14 @@
 class RationalMatrix
 {
 private:
-    unsigned rows, cols;
+    size_t rows, cols;
     std::vector<std::vector<Rational>> matrix;
 public:
-    explicit RationalMatrix(const unsigned &_rows, const unsigned &_cols);
-    void resize(const unsigned &_rows, const unsigned &_cols);
-    void swapRows(const unsigned &row1, const unsigned &row2);
-    void multiplyRow(const unsigned &row, const Rational &k);
-    Rational& operator ()(const unsigned &row, const unsigned &col);
+    explicit RationalMatrix(const size_t &_rows, const size_t &_cols);
+    void resize(const size_t &_rows, const size_t &_cols);
+    void swapRows(const size_t &row1, const size_t &row2);
+    std::vector<Rational>& operator ()(const size_t &row);
+    Rational& operator ()(const size_t &row, const size_t &col);
 
     friend std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix);
 };

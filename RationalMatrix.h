@@ -15,6 +15,7 @@ private:
     std::vector<std::vector<Rational>> matrix;
 public:
     explicit RationalMatrix(const size_t &_rows, const size_t &_cols);
+    explicit RationalMatrix(const std::vector<std::vector<Rational>> &matrix);
     void resize(const size_t &_rows, const size_t &_cols);
     void swapRows(const size_t &row1, const size_t &row2);
     std::vector<Rational>& operator ()(const size_t &row);

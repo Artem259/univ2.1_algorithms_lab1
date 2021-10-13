@@ -12,8 +12,24 @@ RationalMatrix::RationalMatrix(const size_t &_rows, const size_t &_cols)
     cols = 0;
     this->resize(_rows, _cols);
 }
+RationalMatrix::RationalMatrix(const std::vector<std::vector<Rational>> &_matrix)
+{
+    matrix = {};
+    rows = 0;
+    cols = 0;
+    this->resize(_matrix.size(), _matrix[0].size());
+    for(size_t i=0; i<rows; i++)
+    {
+        assert(_matrix[i].size()==cols);
+        for(size_t j=0; j<cols; j++)
+        {
+            matrix[i][j] = _matrix[i][j];
+        }
+    }
+}
 void RationalMatrix::resize(const size_t &_rows, const size_t &_cols)
 {
+    assert(_rows!=0 && _cols!=0);
     matrix.resize(_rows);
     for(auto &row: matrix)
     {

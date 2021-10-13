@@ -19,8 +19,18 @@ public:
     void swapRows(const size_t &row1, const size_t &row2);
     std::vector<Rational>& operator ()(const size_t &row);
     Rational& operator ()(const size_t &row, const size_t &col);
+    RationalMatrix inverse();
 
     friend std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix);
 };
+
+std::vector<Rational> operator +(const std::vector<Rational> &row1, const Rational &k);
+std::vector<Rational> operator -(const std::vector<Rational> &row1, const Rational &k);
+std::vector<Rational> operator *(const std::vector<Rational> &row1, const Rational &k);
+std::vector<Rational> operator /(const std::vector<Rational> &row1, const Rational &k);
+std::vector<Rational> operator +(const std::vector<Rational> &row1, const std::vector<Rational> &row2);
+std::vector<Rational> operator -(const std::vector<Rational> &row1, const std::vector<Rational> &row2);
+std::vector<Rational> operator *(const std::vector<Rational> &row1, const std::vector<Rational> &row2);
+std::vector<Rational> operator /(const std::vector<Rational> &row1, const std::vector<Rational> &row2);
 
 #endif

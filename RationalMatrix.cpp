@@ -37,18 +37,34 @@ Rational& RationalMatrix::operator ()(const size_t &row, const size_t &col)
     assert(row<rows && col<cols);
     return matrix[row][col];
 }
-
-std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix)
+RationalMatrix RationalMatrix::inverse()
 {
-    for(auto &row: matrix.matrix)
+    assert(rows==cols); //перевірка, що матриця квадратна
+    RationalMatrix tmp = *this; //копіювання поточної матриці для проведення перетворень без її зміни
+    RationalMatrix res(rows, cols); //створення результуючої матриці такого ж розміру (поки що нульової)
+    for(size_t i=0; i<rows; i++) res(i,i)=Rational(1,1); //перетворення результуючої матриці на одиничну
+    for(size_t i=0; i<rows; i++) //цикл по всім рядкам
     {
-        for(auto &col: row)
+        if(tmp(i,i).numerator==0) //діагональний елемент = 0 (треба переставляти рядки)
         {
-            ofs << col << " ";
+            size_t c = i+1;
+            while(tmp(c,i).numerator==0) //пошук першого не нульового елемента в тому ж стовпці
+            {
+                i++;
+                if(c==rows) return RationalMatrix(0,0); //якщо такого елемента немає - помилка (повертається порожня матриця)
+            }
+            this->swapRows(i,c);
         }
-        ofs << std::endl;
+        tmp(i) = tmp(i)/tmp(i,i); //перетворення діагонального елемента на 1
+        res(i) = res(i)/tmp(i,i);
+        for(size_t j=0; i<rows; j++)
+        {
+            if(j==i) continue;
+            tmp(j) = tmp(j)-tmp(i)*tmp(j,i);
+            res(j) = res(j)-res(i)*tmp(j,i);
+        }
     }
-    return ofs;
+    return res;
 }
 
 std::vector<Rational> operator +(const std::vector<Rational> &row1, const Rational &k)
@@ -121,4 +137,17 @@ std::vector<Rational> operator /(const std::vector<Rational> &row1, const std::v
         res[i] = row1[i]/row2[i];
     }
     return res;
+}
+
+std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix)
+{
+    for(auto &row: matrix.matrix)
+    {
+        for(auto &col: row)
+        {
+            ofs << col << " ";
+        }
+        ofs << std::endl;
+    }
+    return ofs;
 }

@@ -23,6 +23,8 @@ public:
     RationalMatrix inverse(); //повертає обернену матрицю
 
     friend std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix);
+    friend bool operator ==(const RationalMatrix &m1, const RationalMatrix &m2);
+    friend bool operator !=(const RationalMatrix &m1, const RationalMatrix &m2);
 };
 
 std::vector<Rational> operator +(const std::vector<Rational> &row1, const Rational &k); //рядок+константа

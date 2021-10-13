@@ -6,7 +6,11 @@ bool Test()
     std::vector<RationalMatrix> input;
     std::vector<RationalMatrix> output;
 
-
+    size_t len = input.size();
+    for(size_t i=0; i<len; i++)
+    {
+        if()
+    }
 }
 
 int main()

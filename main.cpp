@@ -4,11 +4,12 @@
 
 int main()
 {
-    RationalMatrix b(2,3);
-    b(0,0).denominator = 2;
-    b(1,2).numerator = 4;
-    std::cout<<b<<std::endl;
-    b.swapRows(0,1);
-    std::cout<<b<<std::endl;
+    RationalMatrix b({
+                             {Rational{1,2},Rational{3,4},Rational{0}},
+                             {Rational{7,8},Rational{-7,13},Rational{1,3}},
+                             {Rational{0},Rational{-7,9},Rational{-4,5}}
+    });
+    RationalMatrix c = b.inverse();
+    std::cout<<c<<std::endl;
     return 0;
 }

@@ -1,6 +1,13 @@
 #include <iostream>
 #include "RationalMatrix.h"
 
+bool Test()
+{
+    std::vector<RationalMatrix> input;
+    std::vector<RationalMatrix> output;
+
+
+}
 
 int main()
 {

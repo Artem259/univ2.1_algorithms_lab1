@@ -80,6 +80,16 @@ Rational operator / (const Rational &r1, const Rational &r2)
     return r3;
 }
 
+bool operator ==(const Rational &r1, const Rational &r2)
+{
+    return (r1.numerator==r2.numerator) && (r1.denominator=r2.denominator);
+}
+
+bool operator !=(const Rational &r1, const Rational &r2)
+{
+    return !(r1==r2);
+}
+
 std::ostream& operator << (std::ostream &ofs, const Rational &r)
 {
     ofs << r.numerator << "/" << r.denominator;

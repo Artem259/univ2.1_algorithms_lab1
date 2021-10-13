@@ -59,7 +59,7 @@ RationalMatrix RationalMatrix::inverse()
     RationalMatrix tmp = *this; //копіювання поточної матриці для проведення перетворень без її зміни
     RationalMatrix res(rows, cols); //створення результуючої матриці такого ж розміру (поки що нульової)
     for(size_t i=0; i<rows; i++) res(i,i)=Rational(1,1); //перетворення результуючої матриці на одиничну
-    Rational elem;
+    Rational k;
     for(size_t i=0; i<rows; i++) //цикл по всім рядкам
     {
         if(tmp(i,i).numerator==0) //діагональний елемент = 0 (треба переставляти рядки)
@@ -73,15 +73,15 @@ RationalMatrix RationalMatrix::inverse()
             tmp.swapRows(i,c);
             res.swapRows(i,c);
         }
-        elem = tmp(i,i);
-        tmp(i) = tmp(i)/elem; //перетворення діагонального елемента на 1
-        res(i) = res(i)/elem;
-        for(size_t j=0; j<rows; j++)
+        k = tmp(i,i);
+        tmp(i) = tmp(i)/k; //перетворення діагонального елемента на 1
+        res(i) = res(i)/k; //повторення операції над результуючою матрицею
+        for(size_t j=0; j<rows; j++) //занулення інших елементів стовпчика
         {
-            if(j==i) continue;
-            elem = tmp(j,i);
-            tmp(j) = tmp(j)-tmp(i)*elem;
-            res(j) = res(j)-res(i)*elem;
+            if(j==i) continue; //сам діагональний елемент змінювати не потрібно
+            k = tmp(j,i);
+            tmp(j) = tmp(j)-tmp(i)*k; //занулення елемента
+            res(j) = res(j)-res(i)*k; //повторення операції над результуючою матрицею
         }
     }
     return res;

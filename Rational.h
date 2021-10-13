@@ -26,5 +26,7 @@ Rational operator + (const Rational &r1,const Rational &r2);
 Rational operator - (const Rational &r1,const Rational &r2);
 Rational operator * (const Rational &r1,const Rational &r2);
 Rational operator / (const Rational &r1, const Rational &r2);
+bool operator ==(const Rational &r1, const Rational &r2);
+bool operator !=(const Rational &r1, const Rational &r2);
 
 #endif //LAB1_RATIONAL_H

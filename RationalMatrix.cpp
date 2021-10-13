@@ -158,6 +158,19 @@ std::vector<Rational> operator /(const std::vector<Rational> &row1, const std::v
     }
     return res;
 }
+
+std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix)
+{
+    for(auto &row: matrix.matrix)
+    {
+        for(auto &col: row)
+        {
+            ofs << col << " ";
+        }
+        ofs << std::endl;
+    }
+    return ofs;
+}
 bool operator ==(const RationalMatrix &m1, const RationalMatrix &m2)
 {
     if((m1.rows!=m2.rows) || (m1.cols!=m2.cols)) return false;
@@ -173,17 +186,4 @@ bool operator ==(const RationalMatrix &m1, const RationalMatrix &m2)
 bool operator !=(const RationalMatrix &m1, const RationalMatrix &m2)
 {
     return !(m1==m2);
-}
-
-std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix)
-{
-    for(auto &row: matrix.matrix)
-    {
-        for(auto &col: row)
-        {
-            ofs << col << " ";
-        }
-        ofs << std::endl;
-    }
-    return ofs;
 }

@@ -14,7 +14,7 @@ private:
     size_t rows, cols;
     std::vector<std::vector<Rational>> matrix;
 public:
-    explicit RationalMatrix(const size_t &_rows, const size_t &_cols); //конструктор нульової матриці заданого розміру
+    RationalMatrix(const size_t &_rows, const size_t &_cols); //конструктор нульової матриці заданого розміру
     explicit RationalMatrix(const std::vector<std::vector<Rational>> &matrix); //конструктор заповненої матриці
     void resize(const size_t &_rows, const size_t &_cols); //змінити розмір матриці
     void swapRows(const size_t &row1, const size_t &row2); //поміняти місцями рядки матриці

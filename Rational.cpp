@@ -43,6 +43,18 @@ Rational::Rational(int n, int d)
     reduction(numerator, denominator);
 }
 
+Rational::Rational(int n)
+{
+    numerator = n;
+    denominator = 1;
+}
+
+Rational::Rational(const Rational &r)
+{
+    numerator = r.numerator;
+    denominator = r.denominator;
+}
+
 
 Rational operator + (const Rational &r1,const Rational &r2)
 {
@@ -82,7 +94,7 @@ Rational operator / (const Rational &r1, const Rational &r2)
 
 bool operator ==(const Rational &r1, const Rational &r2)
 {
-    return (r1.numerator==r2.numerator) && (r1.denominator=r2.denominator);
+    return (r1.numerator==r2.numerator) && (r1.denominator==r2.denominator);
 }
 
 bool operator !=(const Rational &r1, const Rational &r2)

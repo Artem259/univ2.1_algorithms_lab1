@@ -16,8 +16,9 @@ public:
     int denominator;
 
     Rational();
-
-    explicit Rational(int n, int d = 1);
+    Rational(int n, int d);
+    explicit Rational(int n);
+    Rational(const Rational &r);
 
     friend std::ostream& operator << (std::ostream &ofs, const Rational &r);
 };

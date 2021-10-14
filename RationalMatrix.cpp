@@ -68,7 +68,7 @@ RationalMatrix RationalMatrix::inverse()
             while(tmp(c,i).numerator==0) //пошук першого не нульового елемента в тому ж стовпці
             {
                 c++;
-                if(c==rows) return RationalMatrix(1,1); //якщо такого елемента немає - помилка (повертається порожня матриця)
+                if(c==rows) return {1,1}; //якщо такого елемента немає - помилка (повертається порожня матриця)
             }
             tmp.swapRows(i,c);
             res.swapRows(i,c);

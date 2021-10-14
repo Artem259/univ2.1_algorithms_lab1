@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
-#include <cmath>
+#include <chrono>
+#include <random>
 #include "RationalMatrix.h"
 
 bool Test()
@@ -18,30 +19,49 @@ bool Test()
                     {{1404,1745},{-5616,12215},{-468,2443}},
                     {{-273,349},{156,349},{-1485,1396}}}});
 
+    srand(time(nullptr));
+    input.emplace_back(1000,1000);
+    output.emplace_back(10,10);
+    for(auto u=0;u<1000; u++)
+    {
+        for(auto y=0;y<1000; y++)
+        {
+            input.back()(u,y)={rand(), rand()};
+        }
+    }
 
-    clock_t start, stop;
-    double time;
+
     RationalMatrix res(1,1);
     size_t len = input.size();
     for(size_t i=0; i<len; i++)
     {
+/*
+        auto start = std::chrono::high_resolution_clock::now();
+        for(auto h=0; h<10000; h++)
+        {
+            auto end = std::chrono::high_resolution_clock::now();
+            auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+            std::cout<<time.count()<<std::endl;
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+*/
         std::cout<<"Test "<<i<<": ";
 
-        start = clock();
+        auto start = std::chrono::high_resolution_clock::now();
         res = input[i].inverse();
-        stop = clock();
-        time = (double)(stop-start)/CLOCKS_PER_SEC;
-        if(time<0.01) time = 0.01;
-        else time = std::round(time*100)/100;
+        auto end = std::chrono::high_resolution_clock::now();
+        auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
 
         if(res != output[i])
         {
-            std::cout<<"Failed ("<<time<<" ms)\n";
+            std::cout<<"Failed ("<<time.count()<<" ms)\n";
             return false;
         }
         else
         {
-            std::cout<<"Passed ("<<time<<" ms)\n";
+            std::cout<<"Passed ("<<time.count()<<" ms)\n";
         }
     }
     std::cout<<"Testing passed\n";

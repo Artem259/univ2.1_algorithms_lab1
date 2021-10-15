@@ -27,13 +27,22 @@ public:
     friend bool operator !=(const RationalMatrix &m1, const RationalMatrix &m2);
 };
 
-std::vector<Rational> operator +(const std::vector<Rational> &row1, const Rational &k); //рядок+константа
-std::vector<Rational> operator -(const std::vector<Rational> &row1, const Rational &k); //рядок-константа
-std::vector<Rational> operator *(const std::vector<Rational> &row1, const Rational &k); //рядок*константа
-std::vector<Rational> operator /(const std::vector<Rational> &row1, const Rational &k); //рядок/константа
-std::vector<Rational> operator +(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок+рядок
-std::vector<Rational> operator -(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок-рядок
-std::vector<Rational> operator *(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок*рядок
-std::vector<Rational> operator /(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок/рядок
+std::vector<Rational> operator +(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок+константа
+std::vector<Rational> operator -(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок-константа
+std::vector<Rational> operator *(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок*константа
+std::vector<Rational> operator /(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок/константа
+std::vector<Rational> operator +(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок=рядок+рядок
+std::vector<Rational> operator -(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок=рядок-рядок
+std::vector<Rational> operator *(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок=рядок*рядок
+std::vector<Rational> operator /(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок=рядок/рядок
+
+void operator +=(std::vector<Rational> &row, const Rational &k); //рядок+=константа
+void operator -=(std::vector<Rational> &row, const Rational &k); //рядок-=константа
+void operator *=(std::vector<Rational> &row, const Rational &k); //рядок*=константа
+void operator /=(std::vector<Rational> &row, const Rational &k); //рядок/=константа
+void operator +=(std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок+=рядок
+void operator -=(std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок-=рядок
+void operator *=(std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок*=рядок
+void operator /=(std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок/=рядок
 
 #endif

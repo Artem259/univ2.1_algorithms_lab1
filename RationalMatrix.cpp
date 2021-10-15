@@ -64,24 +64,27 @@ RationalMatrix RationalMatrix::inverse()
     {
         if(tmp(i,i).numerator==0) //діагональний елемент = 0 (треба переставляти рядки)
         {
-            size_t c = i+1;
+            size_t c = i;
             while(tmp(c,i).numerator==0) //пошук першого не нульового елемента в тому ж стовпці
             {
                 c++;
-                if(c==rows) return {1,1}; //якщо такого елемента немає - помилка (повертається порожня матриця)
+                if(c==rows)
+                {
+                    return {1,1};
+                }//якщо такого елемента немає - помилка (повертається порожня матриця)
             }
             tmp.swapRows(i,c);
             res.swapRows(i,c);
         }
         k = tmp(i,i);
-        tmp(i) = tmp(i)/k; //перетворення діагонального елемента на 1
-        res(i) = res(i)/k; //повторення операції над результуючою матрицею
+        tmp(i) /= k; //перетворення діагонального елемента на 1
+        res(i) /= k; //повторення операції над результуючою матрицею
         for(size_t j=0; j<rows; j++) //занулення інших елементів стовпчика
         {
             if(j==i) continue; //сам діагональний елемент змінювати не потрібно
             k = tmp(j,i);
-            tmp(j) = tmp(j)-tmp(i)*k; //занулення елемента
-            res(j) = res(j)-res(i)*k; //повторення операції над результуючою матрицею
+            tmp(j) -= tmp(i)*k; //занулення елемента
+            res(j) -= res(i)*k; //повторення операції над результуючою матрицею
         }
     }
     return res;
@@ -157,6 +160,83 @@ std::vector<Rational> operator /(const std::vector<Rational> &row1, const std::v
         res[i] = row1[i]/row2[i];
     }
     return res;
+}
+
+void operator +=(std::vector<Rational> &row, const Rational &k)
+{
+    size_t len = row.size();
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row[i] = row[i]+k;
+    }
+}
+void operator -=(std::vector<Rational> &row, const Rational &k)
+{
+    size_t len = row.size();
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row[i] = row[i]-k;
+    }
+}
+void operator *=(std::vector<Rational> &row, const Rational &k)
+{
+    size_t len = row.size();
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row[i] = row[i]*k;
+    }
+}
+void operator /=(std::vector<Rational> &row, const Rational &k)
+{
+    size_t len = row.size();
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row[i] = row[i]/k;
+    }
+}
+void operator +=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
+{
+    size_t len = row1.size();
+    assert(row2.size()==len);
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row1[i] = row1[i]+row2[i];
+    }
+}
+void operator -=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
+{
+    size_t len = row1.size();
+    assert(row2.size()==len);
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row1[i] = row1[i]-row2[i];
+    }
+}
+void operator *=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
+{
+    size_t len = row1.size();
+    assert(row2.size()==len);
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row1[i] = row1[i]*row2[i];
+    }
+}
+void operator /=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
+{
+    size_t len = row1.size();
+    assert(row2.size()==len);
+    std::vector<Rational> res(len);
+    for(size_t i=0; i<len; i++)
+    {
+        row1[i] = row1[i]/row2[i];
+    }
 }
 
 std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix)

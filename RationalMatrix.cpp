@@ -58,23 +58,23 @@ RationalMatrix RationalMatrix::inverse()
     assert(rows==cols); //перевірка, що матриця квадратна
     RationalMatrix tmp = *this; //копіювання поточної матриці для проведення перетворень без її зміни
     RationalMatrix res(rows, cols); //створення результуючої матриці такого ж розміру (поки що нульової)
-    for(size_t i=0; i<rows; i++) res(i,i)=Rational(1,1); //перетворення результуючої матриці на одиничну
     Rational k;
+    for(size_t i=0; i<rows; i++) res(i,i)=Rational(1,1); //перетворення результуючої матриці на одиничну
     for(size_t i=0; i<rows; i++) //цикл по всім рядкам
     {
+        /*std::cout<<"\n"<<tmp;
+        std::cout<<"\n"<<res;
+        std::cout<<"------------------------------------";*/
         if(tmp(i,i).numerator==0) //діагональний елемент = 0 (треба переставляти рядки)
         {
             size_t c = i;
             while(tmp(c,i).numerator==0) //пошук першого не нульового елемента в тому ж стовпці
             {
                 c++;
-                if(c==rows)
-                {
-                    return {1,1};
-                }//якщо такого елемента немає - помилка (повертається порожня матриця)
+                if(c==rows) return {1,1}; //якщо такого елемента немає - помилка (повертається порожня матриця)
             }
-            tmp.swapRows(i,c);
-            res.swapRows(i,c);
+            tmp.swapRows(i,c); //перестановка рядків
+            res.swapRows(i,c); //повторення операції над результуючою матрицею
         }
         k = tmp(i,i);
         tmp(i) /= k; //перетворення діагонального елемента на 1
@@ -83,10 +83,13 @@ RationalMatrix RationalMatrix::inverse()
         {
             if(j==i) continue; //сам діагональний елемент змінювати не потрібно
             k = tmp(j,i);
-            tmp(j) -= tmp(i)*k; //занулення елемента
-            res(j) -= res(i)*k; //повторення операції над результуючою матрицею
+            tmp(j) -= tmp(i)*k; //занулення елемента [tmp(j) = tmp(j)-tmp(i)*k]
+            res(j) -= res(i)*k; //повторення операції над результуючою матрицею [res(j) = res(j)-res(i)*k]
         }
     }
+    /*std::cout<<"\n"<<tmp;
+    std::cout<<"\n"<<res;
+    std::cout<<"------------------------------------";*/
     return res;
 }
 
@@ -165,7 +168,6 @@ std::vector<Rational> operator /(const std::vector<Rational> &row1, const std::v
 void operator +=(std::vector<Rational> &row, const Rational &k)
 {
     size_t len = row.size();
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row[i] = row[i]+k;
@@ -174,7 +176,6 @@ void operator +=(std::vector<Rational> &row, const Rational &k)
 void operator -=(std::vector<Rational> &row, const Rational &k)
 {
     size_t len = row.size();
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row[i] = row[i]-k;
@@ -183,7 +184,6 @@ void operator -=(std::vector<Rational> &row, const Rational &k)
 void operator *=(std::vector<Rational> &row, const Rational &k)
 {
     size_t len = row.size();
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row[i] = row[i]*k;
@@ -192,7 +192,6 @@ void operator *=(std::vector<Rational> &row, const Rational &k)
 void operator /=(std::vector<Rational> &row, const Rational &k)
 {
     size_t len = row.size();
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row[i] = row[i]/k;
@@ -202,7 +201,6 @@ void operator +=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
 {
     size_t len = row1.size();
     assert(row2.size()==len);
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row1[i] = row1[i]+row2[i];
@@ -212,7 +210,6 @@ void operator -=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
 {
     size_t len = row1.size();
     assert(row2.size()==len);
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row1[i] = row1[i]-row2[i];
@@ -222,7 +219,6 @@ void operator *=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
 {
     size_t len = row1.size();
     assert(row2.size()==len);
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row1[i] = row1[i]*row2[i];
@@ -232,7 +228,6 @@ void operator /=(std::vector<Rational> &row1, const std::vector<Rational> &row2)
 {
     size_t len = row1.size();
     assert(row2.size()==len);
-    std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
         row1[i] = row1[i]/row2[i];

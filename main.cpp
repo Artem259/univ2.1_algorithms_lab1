@@ -46,8 +46,7 @@ bool Test()
     output.push_back(RationalMatrix{{{{0,1}}}});
     //-------------------------------------------------------------------------------------------------//
     RationalMatrix res(1,1);
-    size_t len = input.size();
-    for(size_t i=0; i<len; i++)
+    for(size_t i=0; i<input.size(); i++)
     {
         std::cout<<"Test "<<i<<": ";
 

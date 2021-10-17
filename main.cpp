@@ -45,6 +45,11 @@ bool Test()
                     {{0,1},{-65,76},{3,2},{12,15}}}});
     output.push_back(RationalMatrix{{{{0,1}}}});
     //-------------------------------------------------------------------------------------------------//
+    // Test 4 (random) [always FAIL]
+    input.push_back({RationalMatrix{300,300}});
+    input.back().fillRandom(5);
+    output.push_back(RationalMatrix{{{{0,1}}}});
+    //-------------------------------------------------------------------------------------------------//
     RationalMatrix res(1,1);
     for(size_t i=0; i<input.size(); i++)
     {

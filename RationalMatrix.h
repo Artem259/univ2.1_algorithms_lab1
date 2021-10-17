@@ -18,6 +18,7 @@ public:
     explicit RationalMatrix(const std::vector<std::vector<Rational>> &matrix); //конструктор заповненої матриці
     void resize(const size_t &_rows, const size_t &_cols); //змінити розмір матриці
     void swapRows(const size_t &row1, const size_t &row2); //поміняти місцями рядки матриці
+    void fillRandom(const long long &n);
     std::vector<Rational>& operator ()(const size_t &row); //повертяє посилання на рядок матриці
     Rational& operator ()(const size_t &row, const size_t &col); //повертяє посилання на елемент матриці
     RationalMatrix inverse(); //повертає обернену матрицю

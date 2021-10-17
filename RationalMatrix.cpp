@@ -43,6 +43,16 @@ void RationalMatrix::swapRows(const size_t &row1, const size_t &row2)
     assert(row1<rows && row2<rows);
     swap(matrix[row1], matrix[row2]);
 }
+void RationalMatrix::fillRandom(const long long &n)
+{
+    for(auto &row: matrix)
+    {
+        for(auto &col: row)
+        {
+            col.random(n);
+        }
+    }
+}
 std::vector<Rational>& RationalMatrix::operator ()(const size_t &row)
 {
     assert(row<rows);

@@ -1,33 +1,37 @@
 //
-// Created by Pavel on Kilko 9/20/2021.
+// Created by Pavel on 10/16/2021.
 //
 
 #ifndef LAB1_RATIONAL_H
 #define LAB1_RATIONAL_H
+
 #include <iostream>
 
-int gcd(int x, int y);
-void reduction(int &x, int &y);
+long long gcd(long long x, long long y);
+void reduction(long long &x, long long &y);
 
 class Rational
 {
 public:
-    int numerator;
-    int denominator;
+    long long numerator;
+    long long denominator;
 
     Rational();
-    Rational(int n, int d);
-    explicit Rational(int n);
+    Rational(long long n, long long d);
+    explicit Rational(long long n);
     Rational(const Rational &r);
 
-    friend std::ostream& operator << (std::ostream &ofs, const Rational &r);
-};
+    void random(const long long &n);
 
-Rational operator + (const Rational &r1,const Rational &r2);
-Rational operator - (const Rational &r1,const Rational &r2);
-Rational operator * (const Rational &r1,const Rational &r2);
-Rational operator / (const Rational &r1, const Rational &r2);
-bool operator ==(const Rational &r1, const Rational &r2);
-bool operator !=(const Rational &r1, const Rational &r2);
+    friend std::ostream& operator<< (std::ostream &out, const Rational &r);
+
+    friend Rational operator+ (const Rational &r1,const Rational &r2);
+    friend Rational operator- (const Rational &r1,const Rational &r2);
+    friend Rational operator* (const Rational &r1,const Rational &r2);
+    friend Rational operator/ (const Rational &r1, const Rational &r2);
+
+    friend bool operator== (const Rational &r1, const Rational &r2);
+    friend bool operator!= (const Rational &r1, const Rational &r2);
+};
 
 #endif //LAB1_RATIONAL_H

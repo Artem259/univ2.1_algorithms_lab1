@@ -1,19 +1,22 @@
 //
-// Created by Pavel Kilko on 9/20/2021.
+// Created by Pavel on 10/16/2021.
 //
 
 #include "Rational.h"
-#include <iostream>
+#include <random>
 
-int gcd(int x, int y) // Euclidean algorithm
+std::random_device rd;
+std::mt19937 mersenne(rd());
+
+long long gcd(long long x, long long y) // Euclidean algorithm
 {
     if (y == 0) return x;
     return gcd(y, x % y);
 }
 
-void reduction(int &x, int &y)
+void reduction(long long &x, long long &y)
 {
-    int nod = gcd(x, y);
+    long long nod = gcd(x, y);
     if(!nod)
     {
         y = 1;
@@ -26,6 +29,10 @@ void reduction(int &x, int &y)
         x *= -1;
         y *= -1;
     }
+    if(y==0)
+    {
+        y = 1;
+    }
 }
 
 Rational::Rational()
@@ -34,7 +41,7 @@ Rational::Rational()
     denominator = 1;
 }
 
-Rational::Rational(int n, int d)
+Rational::Rational(long long n, long long d)
 {
     numerator = n;
     denominator = d;
@@ -43,7 +50,7 @@ Rational::Rational(int n, int d)
     reduction(numerator, denominator);
 }
 
-Rational::Rational(int n)
+Rational::Rational(long long n)
 {
     numerator = n;
     denominator = 1;
@@ -55,6 +62,22 @@ Rational::Rational(const Rational &r)
     denominator = r.denominator;
 }
 
+void Rational::random(const long long &n)
+{
+    numerator = mersenne() % (std::abs(n)+1);
+    denominator = mersenne() % (std::abs(n)+1);
+    if (mersenne() % 2)
+        numerator *= -1;
+    if (mersenne() % 2)
+        denominator *= -1;
+    reduction(numerator, denominator);
+}
+
+std::ostream& operator<< (std::ostream &out, const Rational &r)
+{
+    out << r.numerator << '/' << r.denominator;
+    return out;
+}
 
 Rational operator + (const Rational &r1,const Rational &r2)
 {
@@ -94,16 +117,12 @@ Rational operator / (const Rational &r1, const Rational &r2)
 
 bool operator ==(const Rational &r1, const Rational &r2)
 {
-    return (r1.numerator==r2.numerator) && (r1.denominator==r2.denominator);
+    if (r1.numerator * r2.denominator == r2.numerator * r1.denominator)
+        return true;
+    return false;
 }
 
 bool operator !=(const Rational &r1, const Rational &r2)
 {
     return !(r1==r2);
-}
-
-std::ostream& operator << (std::ostream &ofs, const Rational &r)
-{
-    ofs << r.numerator << "/" << r.denominator;
-    return ofs;
 }

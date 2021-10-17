@@ -75,6 +75,7 @@ RationalMatrix RationalMatrix::inverse()
         /*std::cout<<"\n"<<tmp;
         std::cout<<"\n"<<res;
         std::cout<<"------------------------------------";*/
+        std::cout<<i<<std::endl;
         if(tmp(i,i).numerator==0) //діагональний елемент = 0 (треба переставляти рядки)
         {
             size_t c = i;

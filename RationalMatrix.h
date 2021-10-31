@@ -21,17 +21,17 @@ public:
     void fillRandom(const long long &n); //заповнення матриці випадковими значеннями
     std::vector<Rational>& operator ()(const size_t &row); //повертяє посилання на рядок матриці
     Rational& operator ()(const size_t &row, const size_t &col); //повертяє посилання на елемент матриці
-    RationalMatrix inverse(); //повертає обернену матрицю
+    RationalMatrix inverse() const; //повертає обернену матрицю
 
     friend std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix);
     friend bool operator ==(const RationalMatrix &m1, const RationalMatrix &m2);
     friend bool operator !=(const RationalMatrix &m1, const RationalMatrix &m2);
 };
 
-std::vector<Rational> operator +(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок+константа
-std::vector<Rational> operator -(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок-константа
-std::vector<Rational> operator *(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок*константа
-std::vector<Rational> operator /(const std::vector<Rational> &row1, const Rational &k); //рядок=рядок/константа
+std::vector<Rational> operator +(const std::vector<Rational> &row, const Rational &k); //рядок=рядок+константа
+std::vector<Rational> operator -(const std::vector<Rational> &row, const Rational &k); //рядок=рядок-константа
+std::vector<Rational> operator *(const std::vector<Rational> &row, const Rational &k); //рядок=рядок*константа
+std::vector<Rational> operator /(const std::vector<Rational> &row, const Rational &k); //рядок=рядок/константа
 std::vector<Rational> operator +(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок=рядок+рядок
 std::vector<Rational> operator -(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок=рядок-рядок
 std::vector<Rational> operator *(const std::vector<Rational> &row1, const std::vector<Rational> &row2); //рядок=рядок*рядок

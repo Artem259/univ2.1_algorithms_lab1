@@ -63,7 +63,7 @@ Rational& RationalMatrix::operator ()(const size_t &row, const size_t &col)
     assert(row<rows && col<cols);
     return matrix[row][col];
 }
-RationalMatrix RationalMatrix::inverse()
+RationalMatrix RationalMatrix::inverse() const
 {
     assert(rows==cols); //перевірка, що матриця квадратна
     RationalMatrix tmp = *this; //копіювання поточної матриці для проведення перетворень без її зміни
@@ -103,48 +103,48 @@ RationalMatrix RationalMatrix::inverse()
     return res;
 }
 
-std::vector<Rational> operator +(const std::vector<Rational> &row1, const Rational &k)
+std::vector<Rational> operator +(const std::vector<Rational> &row, const Rational &k)
 {
-    size_t len = row1.size();
+    size_t len = row.size();
     std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
-        res[i] = row1[i]+k;
+        res[i] = row[i]+k;
     }
     return res;
 }
-std::vector<Rational> operator -(const std::vector<Rational> &row1, const Rational &k)
+std::vector<Rational> operator -(const std::vector<Rational> &row, const Rational &k)
 {
-    return row1+(k*Rational{-1,1});
+    return row+(k*Rational{-1,1});
 }
-std::vector<Rational> operator *(const std::vector<Rational> &row1, const Rational &k)
+std::vector<Rational> operator *(const std::vector<Rational> &row, const Rational &k)
 {
-    size_t len = row1.size();
+    size_t len = row.size();
     std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
-        res[i] = row1[i]*k;
+        res[i] = row[i]*k;
     }
     return res;
 }
-std::vector<Rational> operator /(const std::vector<Rational> &row1, const Rational &k)
+std::vector<Rational> operator /(const std::vector<Rational> &row, const Rational &k)
 {
-    size_t len = row1.size();
+    size_t len = row.size();
     std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
-        res[i] = row1[i]/k;
+        res[i] = row[i]/k;
     }
     return res;
 }
-std::vector<Rational> operator +(const std::vector<Rational> &row1, const std::vector<Rational> &row2)
+std::vector<Rational> operator +(const std::vector<Rational> &row, const std::vector<Rational> &row2)
 {
-    size_t len = row1.size();
+    size_t len = row.size();
     assert(row2.size()==len);
     std::vector<Rational> res(len);
     for(size_t i=0; i<len; i++)
     {
-        res[i] = row1[i]+row2[i];
+        res[i] = row[i]+row2[i];
     }
     return res;
 }

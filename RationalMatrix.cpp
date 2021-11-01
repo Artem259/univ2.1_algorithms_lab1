@@ -72,9 +72,6 @@ RationalMatrix RationalMatrix::inverse() const
     Rational k;
     for(size_t i=0; i<rows; i++) //цикл по всім рядкам
     {
-        /*std::cout<<"\n"<<tmp;
-        std::cout<<"\n"<<res;
-        std::cout<<"------------------------------------";*/
         if(tmp(i,i).numerator==0) //діагональний елемент = 0 (треба переставляти рядки)
         {
             size_t c = i;
@@ -97,9 +94,6 @@ RationalMatrix RationalMatrix::inverse() const
             res(j) -= res(i)*k; //повторення попередньої операції над результуючою матрицею [res(j) = res(j)-res(i)*k]
         }
     }
-    /*std::cout<<"\n"<<tmp;
-    std::cout<<"\n"<<res;
-    std::cout<<"------------------------------------";*/
     return res;
 }
 
